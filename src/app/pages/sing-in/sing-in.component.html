@@ -1,0 +1,158 @@
+<form
+  [formGroup]="form"
+  class="container mx-auto bg-white rounded-lg shadow-lg p-5 mt-32 flex justify-center"
+>
+  <div>
+    <div class="flex gap-2">
+
+      <!-- ------------------[Input Form]------------------ -->
+      <!-- ---------nome -->
+      <div>
+        <label for="name" class="font-bold mb-1 block">Inserisci Nome</label>
+        <input
+          type="text"
+          formControlName="name"
+          placeholder="Nome"
+          class="border-2 rounded-lg p-1"
+        />
+      </div>
+      <!-- --------cognome -->
+      <div>
+        <label for="name" class="font-bold mb-1 block">Inserisci Cognome</label>
+        <input
+          type="text"
+          formControlName="cognome"
+          placeholder="Cognome"
+          class="border-2 rounded-lg p-1"
+        />
+      </div>
+    </div>
+
+    <div class="flex gap-2 mt-3">
+      <div>
+        <!-- -----------password -->
+        <label for="name" class="font-bold mb-1 block"
+          >Inserisci Password</label
+        >
+        <input
+          type="text"
+          formControlName="password"
+          placeholder="**********"
+          class="border-2 rounded-lg p-1"
+        />
+      </div>
+
+      <div>
+        <!-- -----------conferma password -->
+        <label for="name" class="font-bold mb-1 block">Conferma Password</label>
+        <input
+          type="text"
+          formControlName="confPassword"
+          placeholder="**********"
+          class="border-2 rounded-lg p-1"
+        />
+      </div>
+    </div>
+
+    <div class="mt-3">
+      <div>
+        <!-- ---------------genere -->
+        <label for="gender" class="font-bold mb-1 block"
+          >Gender
+          <span class="font-light text-gray-600">(Optional)</span></label
+        >
+        <select formControlName="gender" class="border-2 rounded-lg p-1 w-full">
+          <option value="">Seleziona..</option>
+          <option *ngFor="let option of gender" [value]="option">
+            {{ option }}
+          </option>
+        </select>
+      </div>
+
+      <div class="mt-3">
+        <!-- --------------immagine profilo -->
+        <label for="profilePhoto" class="font-bold mb-1 block"
+          >Inserisci foto profilo
+          <span class="font-light text-gray-600">(Optional)</span></label
+        >
+        <input
+          type="file"
+          formControlName="profilePhoto"
+          class="border-2 rounded-lg p-1 w-full"
+        />
+      </div>
+    </div>
+
+    <!-- -----------------biografia -->
+    <div class="mt-3">
+      <label for="biography" class="font-bold mb-1 block"
+        >Inserisci biografia
+        <span class="font-light text-gray-600">(Optional)</span></label
+      >
+      <input
+        type="text"
+        formControlName="biography"
+        placeholder="Biography"
+        class="border-2 rounded-lg p-1 w-full"
+      />
+    </div>
+
+    <!-- -----------username -->
+    <div class="mt-3">
+      <label for="username" class="font-bold mb-1 block"
+        >Inserisci username</label
+      >
+      <input
+        type="text"
+        formControlName="username"
+        placeholder="Username"
+        class="border-2 rounded-lg p-1 w-full"
+      />
+    </div>
+
+   <!-- --------------------[Validation]---------------------- -->
+    <!-- validazione nome -->
+    <div
+      class="mt-5 bg-amber-600 text-white p-1 rounded-sm"
+      *ngIf="!isValid('name') && isTouched('name')"
+    >
+      Inserisci Nome
+    </div>
+
+    <!-- validazione cognnome -->
+    <div
+      class="mt-1 bg-amber-600 text-white p-1 rounded-sm"
+      *ngIf="!isValid('cognome') && isTouched('cognome')"
+    >
+      Inserisci Cognome
+    </div>
+
+    <!-- validazione password -->
+    <div
+      class="mt-1 bg-amber-600 text-white p-1 rounded-sm"
+      *ngIf="!isValid('password') && isTouched('password')"
+    >
+      Inserisci Password
+    </div>
+
+    <!-- validazione username -->
+    <div
+      class="mt-1 bg-amber-600 text-white p-1 rounded-sm"
+      *ngIf="!isValid('username') && isTouched('username')"
+    >
+      Inserisci Username
+    </div>
+<!-- ------------------------------------------------------- -->
+
+
+    <!----------- bottone --------- -->
+    <div class="text-center">
+      <button
+        (click)="send()"
+        class="mt-6 w-full bg-gray-800 py-2 px-4 text-white rounded-lg"
+      >
+        Invia
+      </button>
+    </div>
+  </div>
+</form>
