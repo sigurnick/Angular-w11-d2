@@ -1,5 +1,5 @@
 import { Component } from '@angular/core';
-import { FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
+import { AbstractControl, FormBuilder, FormControl, FormGroup, ValidationErrors, Validators } from '@angular/forms';
 
 @Component({
   selector: 'app-sing-in',
@@ -26,12 +26,15 @@ export class SingInComponent {
       name: this.fb.control(null,[Validators.required]),  // <-- nelle () inseriamo il valore di default seguito da un array di validatori
       cognome: this.fb.control(null,[Validators.required]),
       password: this.fb.control(null, [Validators.required]),
-      confPassword: this.fb.control(null, [Validators.required]),
+      confPassword: this.fb.control(null, [Validators.required],),
       gender: this.fb.array(this.gender),
       profilePhoto: this.fb.control(null),
       biography: this.fb.control(null),
       username: this.fb.control(null, [Validators.required])
 
+    },
+    {
+      validators: this.passwordValidator
     })
   }
 
@@ -58,18 +61,20 @@ export class SingInComponent {
 
 
   //controllo conferma password
-  // passwordValidator = (formC: FormControl):ValidationErrors | null => {
+  passwordValidator = (formC: AbstractControl):ValidationErrors | null => {
 
-  //   if(this.form.get('password')?.value !== this.form.get('confPassword')?.value) {
-  //     console.log('pass non uguale');
-  //     return {
-  //       invalid: true,
-  //       message: 'La password non corrisponde'
-  //     }
+    if(formC.get('password')?.value !== formC.get('confPassword')?.value) {
+      console.log('pass non uguale');
+      return {
+        invalid: true,
+        message: 'La password non corrisponde'
+      }
 
-  //   }
-  //   return null
-  // }
+    }
+    console.log('pass uguale');
+
+    return null
+  }
 
 
 
